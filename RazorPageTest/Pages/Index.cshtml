@@ -1,0 +1,45 @@
+﻿@page
+@using RazorPageTest.Pages
+@model IndexModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@if (TempData["Message"] != null)
+{
+    <div class="row justify-content-center">
+        <h2>@TempData["Message"]</h2>
+    </div>
+}
+
+
+<div class="row justify-content-center">
+    <div asp-validation-summary="All"></div>
+</div>
+<div class="row justify-content-center">
+    <div class="">
+        <form method="post">
+            <div class="form-group">
+                <label for="nickname">Nickname</label>
+                <input asp-for="Submission.Nickname" class="form-control" id="nickname" placeholder="Nickname">
+            </div>
+            <div class="form-group">
+                <label for="challenge">Select a challenge:</label>
+                <select asp-for="Submission.ChallengeId" class="form-control" id="challenge">
+                    @{
+                        for (int i = 0; i < Model.Challenges.Count; i++)
+                        {
+                            <option title="@Model.Challenges[i].Description" value="@(Model.Challenges[i].Id)">@Model.Challenges[i].Name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="source">Paste your solution:</label>
+                <textarea asp-for="Submission.Source" class="form-control" id="source"></textarea>
+            </div>
+
+            <div class="form-group">
+                <input class="btn btn-primary mx-auto btn-submit" type="submit" value="Submit"/>
+            </div>
+        </form>
+    </div>
+</div>

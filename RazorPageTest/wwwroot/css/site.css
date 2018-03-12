@@ -1,0 +1,25 @@
+﻿.container {
+    margin-top: 2em;
+}
+
+ul.nav {
+    padding: 0.5em;
+}
+
+    ul.nav > li.nav-item.active {
+        border-bottom: 0.2em solid #9b869c;
+        color: #9b869c;
+        pointer-events: none;
+    }
+
+        ul.nav > li.nav-item.active > a {
+            color: #9b869c;
+        }
+
+.btn-submit {
+    width: 100%;
+}
+
+.validation-summary-errors > ul {
+    color: darkred;
+}

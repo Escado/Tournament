@@ -1,0 +1,32 @@
+﻿@page
+@model RazorPageTest.Pages.StatsModel
+
+@{
+    ViewData["Title"] = "Stats";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nickname
+            </th>
+            <th>
+                Score
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Statistics.Scores)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nickname)
+                </td>
+                <td>
+                    1
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
