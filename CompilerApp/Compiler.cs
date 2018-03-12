@@ -12,17 +12,26 @@ namespace CompilerApp
             var data = testData?.Split(';');
             var results = expectedResults?.Split(';');
 
-            for (int i = 0; i < data.Length;i++)
+            for (int i = 0; i < data.Length; i++)
             {
-                Task<int> x = CSharpScript.EvaluateAsync<int>(
-                    code: source,
-                    globalsType: typeof(Globals),
-                    globals: new Globals() { input = int.Parse(data[i]) });
+                try
+                {
+                    Task<int> x = CSharpScript.EvaluateAsync<int>(
+                            code: source,
+                            globalsType: typeof(Globals),
+                            globals: new Globals() { input = int.Parse(data[i]) });
 
-                if (x.Result.ToString() != results[i])
+                    if (x.Result.ToString() != results[i])
+                    {
+                        return false;
+                    }
+                    
+                }
+                catch (CompilationErrorException ex) 
                 {
                     return false;
                 }
+
             }
 
             return true;

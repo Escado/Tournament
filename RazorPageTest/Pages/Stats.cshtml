@@ -17,14 +17,14 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Statistics.Scores)
+        @foreach (var item in Model.Statistics.Scores.OrderByDescending(x => x.Score))
         {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Nickname)
                 </td>
                 <td>
-                    1
+                    @Html.DisplayFor(modelItem => item.Score)
                 </td>
             </tr>
         }

@@ -65,6 +65,16 @@ namespace RazorPageTest
                     TestResults = "441;1156"
                     
                 });
+
+                Challenges.Add(new Challenge()
+                {
+                    Id = 3,
+                    Name = "Easy mode",
+                    Description = "Write a program that prints the number times two",
+                    TestValues = "21;34",
+                    TestResults = "42;68"
+
+                });
                 SaveChanges();
             }
 

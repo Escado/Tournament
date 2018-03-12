@@ -47,14 +47,35 @@ namespace RazorPageTest.Pages
             {
                 return Page();
             }
+
+            var user = _db.Users.SingleOrDefault(x => x.Nickname == Submission.Nickname);
+
+            if (user != null)
+            {
+                var challenge = await _db.CompletedChallenge.Where(x => x.UserId == user.Id && x.ChallengeId == Submission.ChallengeId).ToListAsync();
+
+                if (challenge.Count != 0)
+                {
+                    TempData["Message"] = "Submission was already placed.";
+                    return RedirectToPage("/Index");
+                }
+            }
+
             var result = _submissionValidationService.ValidateSubmission(Submission);
 
             if (result)
             {
+                
+
+                if (user == null)
+                {
+                    user = new User() { Nickname = Submission.Nickname };
+                }
+
                 await _db.CompletedChallenge.AddAsync(new CompletedChallenge()
                 {
                     ChallengeId = Submission.ChallengeId,
-                    User = new User() { Nickname = Submission.Nickname },
+                    User = user,
                     Source = Submission.Source
                 });
 
